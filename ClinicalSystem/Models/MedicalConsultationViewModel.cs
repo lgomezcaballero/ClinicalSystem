@@ -10,5 +10,6 @@
         public decimal Cost { get; set; }
         public string Description { get; set; }
         public decimal DisposableMaterialCost { get; set; }
+        public bool Active { get; set; }
     }
 }
