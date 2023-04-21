@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicalSystem", "ClinicalSystem\ClinicalSystem.csproj", "{284F859A-11D7-4AD8-9BB5-975653B9362E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicalSystem", "ClinicalSystem\ClinicalSystem.csproj", "{284F859A-11D7-4AD8-9BB5-975653B9362E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicalSystem.Repository", "ClinicalSystem.Repository\ClinicalSystem.Repository.csproj", "{2D809624-CAE1-4B4C-92A0-95C3EA1EDCB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicalSystem.Repository", "ClinicalSystem.Repository\ClinicalSystem.Repository.csproj", "{2D809624-CAE1-4B4C-92A0-95C3EA1EDCB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicalSystem.Entities", "ClinicalSystem.Entities\ClinicalSystem.Entities.csproj", "{60C1A05B-0DB8-4268-A194-0AFDAA0CD1DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2D809624-CAE1-4B4C-92A0-95C3EA1EDCB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D809624-CAE1-4B4C-92A0-95C3EA1EDCB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D809624-CAE1-4B4C-92A0-95C3EA1EDCB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C1A05B-0DB8-4268-A194-0AFDAA0CD1DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C1A05B-0DB8-4268-A194-0AFDAA0CD1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C1A05B-0DB8-4268-A194-0AFDAA0CD1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C1A05B-0DB8-4268-A194-0AFDAA0CD1DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
