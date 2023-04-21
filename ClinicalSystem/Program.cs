@@ -1,3 +1,5 @@
+using ClinicalSystem.Services;
+
 namespace ClinicalSystem
 {
     public class Program
@@ -8,6 +10,8 @@ namespace ClinicalSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddSingleton<IPatientServices, PatientServices>();
 
             var app = builder.Build();
 

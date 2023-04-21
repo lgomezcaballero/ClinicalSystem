@@ -1,14 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ClinicalSystem.Models;
+using ClinicalSystem.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicalSystem.Controllers
 {
     public class PatientsController : Controller
     {
+        public IPatientServices services;
+
+        public PatientsController(IPatientServices services)
+        {
+            this.services = services;
+        }
         // GET: PatientsController
         public ActionResult Index()
         {
-            return View();
+            List<PatientViewModel> patients = services.listing();
+            return View(patients);
         }
 
         // GET: PatientsController/Details/5

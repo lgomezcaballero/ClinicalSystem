@@ -9,6 +9,6 @@ namespace ClinicalSystem.Entities
     public class Specialty
     {
         public int ID { get; set; }
-        public string Specialty { get; set; }
+        public string _Specialty { get; set; }
     }
 }

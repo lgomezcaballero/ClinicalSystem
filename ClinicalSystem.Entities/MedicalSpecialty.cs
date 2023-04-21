@@ -8,7 +8,7 @@ namespace ClinicalSystem.Entities
 {
     public class MedicalSpecialty
     {
-        public DoctorViewModel Doctor { get; set; }
-        public SpecialtyViewModel Specialty { get; set; }
+        public Doctor _Doctor { get; set; }
+        public Specialty _Specialty { get; set; }
     }
 }
