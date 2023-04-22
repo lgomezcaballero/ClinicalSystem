@@ -49,7 +49,23 @@ namespace ClinicalSystem.Services
 
         public DoctorViewModel getDoctor(int ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var aux = data.GetDoctor(ID);
+                DoctorViewModel doctor = new()
+                {
+                    ID = aux.ID,
+                    DNI = aux.DNI,
+                    Name = aux.Name,
+                    Active = aux.Active
+                };
+                return doctor;
+            }
+            catch (Exception)
+            {
+
+                throw new Exception();
+            }
         }
 
         public List<DoctorViewModel> listing()

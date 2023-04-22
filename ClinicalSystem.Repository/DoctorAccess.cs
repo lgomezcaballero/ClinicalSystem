@@ -49,7 +49,6 @@ namespace ClinicalSystem.Repository
             try
             {
                 data.setSPQuery("SP_AddDoctor");
-                data.setParameters("@ID", doctor.ID);
                 data.setParameters("@DNI", doctor.DNI);
                 data.setParameters("@Nombre", doctor.Name);
                 data.runAction();

@@ -21,19 +21,22 @@ go
 Create Table Personas(
 	DNI int not null,
 	Nombre varchar(200) not null,
+	Activo bit not null default(1)
 	Primary key (DNI)
 )
 go
 Create Table Pacientes(
-	NroHistoriaClinica bigint not null,
+	NroHistoriaClinica bigint not null identity(1000,1),
 	DNI int not null unique,
+	Activo bit not null default(1)
 	Primary key (NroHistoriaClinica),
 	Foreign key (DNI) references Personas(DNI)
 )
 go
 Create Table Medicos(
-	NroMatricula int not null,
+	NroMatricula int not null identity(100,1),
 	DNI int not null unique,
+	Activo bit not null default(1)
 	Primary key (NroMatricula),
 	Foreign key (DNI) references Personas(DNI)
 )
@@ -66,7 +69,8 @@ Create Table ConsultasMedicas(
 	FechaRealizacion datetime not null default(GETDATE()),
 	Costo decimal(16,2) not null,
 	Descripcion varchar(2000),
-	CostoMaterialDescartable decimal(16,2)
+	CostoMaterialDescartable decimal(16,2),
+	Activo bit not null default(1),
 	Primary key(IDConsulta),
 	Foreign key (NroHistoriaClinica) references Pacientes(NroHistoriaClinica),
 	Foreign key (IDTipoConsulta) references TipoConsultas(IDTipoConsulta),
