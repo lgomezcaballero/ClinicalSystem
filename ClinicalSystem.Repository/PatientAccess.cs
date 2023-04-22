@@ -30,7 +30,8 @@ namespace ClinicalSystem.Repository
 
                     if (!(data.Reader["Nombre"] is DBNull))
                         aux.Name = (string)data.Reader["Nombre"];
-
+                    if (!(data.Reader["ID"] is DBNull))
+                        aux.Active = (bool)data.Reader["Activo"];
                     list.Add(aux);
                 }
                 return list;
@@ -51,7 +52,6 @@ namespace ClinicalSystem.Repository
             try
             {
                 data.setSPQuery("SP_AddPatient");
-                data.setParameters("@ID", patient.ID);
                 data.setParameters("@DNI", patient.DNI);
                 data.setParameters("@nombre", patient.Name);
                 data.runAction();
@@ -103,6 +103,39 @@ namespace ClinicalSystem.Repository
             catch (Exception)
             {
 
+                throw new Exception();
+            }
+            finally
+            {
+                data.closeConnection();
+            }
+        }
+
+        public Patient GetPatient(int DNI)
+        {
+            DataAccess data = new DataAccess();
+            Patient aux = new Patient();
+
+            try
+            {
+                data.setSPQuery("SP_GetPatient");
+                data.setParameters("@DNI", DNI);
+                data.executeRead();
+                if (data.Reader.Read())
+                {
+                    if (!(data.Reader["ID"] is DBNull))
+                        aux.ID = (long)data.Reader["ID"];
+
+                    if (!(data.Reader["DNI"] is DBNull))
+                        aux.DNI = (int)data.Reader["DNI"];
+
+                    if (!(data.Reader["Nombre"] is DBNull))
+                        aux.Name = (string)data.Reader["Nombre"];
+                }
+                return aux;
+            }
+            catch (Exception)
+            {
                 throw new Exception();
             }
             finally

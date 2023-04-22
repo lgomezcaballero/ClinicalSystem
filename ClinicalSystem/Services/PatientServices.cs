@@ -1,6 +1,7 @@
 ﻿using ClinicalSystem.Entities;
 using ClinicalSystem.Models;
 using ClinicalSystem.Repository;
+using System.Reflection.Metadata.Ecma335;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClinicalSystem.Services
@@ -19,7 +20,8 @@ namespace ClinicalSystem.Services
                 Patient aux = new()
                 {
                     DNI = patient.DNI,
-                    Name = patient.Name
+                    Name = patient.Name,
+                    Active = patient.Active
                 };
                 data.Add(aux);
                 return true;
@@ -53,13 +55,17 @@ namespace ClinicalSystem.Services
                 PatientAccess data = new PatientAccess();
                 foreach (var item in data.listing())
                 {
-                    PatientViewModel aux = new()
+                    if (item.Active)
                     {
-                        ID = item.ID,
-                        DNI = item.DNI,
-                        Name = item.Name
-                    };
-                    patients.Add(aux);
+                        PatientViewModel aux = new()
+                        {
+                            ID = item.ID,
+                            DNI = item.DNI,
+                            Name = item.Name,
+                            Active = item.Active
+                        };
+                        patients.Add(aux);
+                    }
                 }
                 return patients;
             }
@@ -79,6 +85,7 @@ namespace ClinicalSystem.Services
                     ID = patient.ID,
                     DNI = patient.DNI,
                     Name = patient.Name,
+                    Active = patient.Active
                 };
                 data.Update(aux);
                 return true;
@@ -90,5 +97,25 @@ namespace ClinicalSystem.Services
             }
         }
 
+        public PatientViewModel getPatient(int DNI)
+        {
+            try
+            {
+                var aux = data.GetPatient(DNI);
+                PatientViewModel patient = new()
+                {
+                    ID = aux.ID,
+                    DNI = aux.DNI,
+                    Name = aux.Name,
+                    Active = aux.Active
+                };
+                return patient;
+            }
+            catch (Exception)
+            {
+
+                throw new Exception();
+            }
+        }
     }
 }

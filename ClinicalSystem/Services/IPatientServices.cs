@@ -8,5 +8,6 @@ namespace ClinicalSystem.Services
         public bool Update(PatientViewModel patient);
         public bool Delete(int id);
         public List<PatientViewModel> listing();
+        public PatientViewModel getPatient(int DNI);
     }
 }

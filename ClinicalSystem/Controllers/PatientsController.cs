@@ -13,20 +13,16 @@ namespace ClinicalSystem.Controllers
         {
             this.services = services;
         }
-        // GET: PatientsController
+
+        [HttpGet]
         public ActionResult Index()
         {
             List<PatientViewModel> patients = services.listing();
             return View(patients);
         }
 
-        // GET: PatientsController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: PatientsController/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -35,10 +31,11 @@ namespace ClinicalSystem.Controllers
         // POST: PatientsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(PatientViewModel patient)
         {
             try
             {
+                services.Create(patient);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -47,46 +44,43 @@ namespace ClinicalSystem.Controllers
             }
         }
 
-        // GET: PatientsController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Details(int dni)
         {
-            return View();
+            if(ModelState.IsValid)
+                return View(services.getPatient(dni));
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Edit(int dni)
+        {
+            if (dni > 0) return View(services.getPatient(dni));
+            else return RedirectToAction(nameof(Index));
         }
 
         // POST: PatientsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(PatientViewModel patient)
         {
             try
             {
+                services.Update(patient);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception)
             {
+
                 return View();
             }
         }
 
-        // GET: PatientsController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult Delete(int DNI)
         {
-            return View();
-        }
+            services.Delete(DNI);
+            return RedirectToAction(nameof(Index));
 
-        // POST: PatientsController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

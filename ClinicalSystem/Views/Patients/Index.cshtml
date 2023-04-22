@@ -14,8 +14,10 @@
                 <td>@patient.ID</td>
                 <td>@patient.DNI</td>
                 <td>@patient.Name</td>
-                <td>@Html.ActionLink("Editar", "Edit", new{id=patient.DNI})</td>
-                <td>@Html.ActionLink("Eliminar", "Delete", new{id=patient.DNI})</td>
+                
+                <td>@Html.ActionLink("Detalles", "Details", new{dni=patient.DNI})</td>
+                <td>@Html.ActionLink("Editar", "Edit", new{dni=patient.DNI})</td>
+                <td>@Html.ActionLink("Eliminar", "Delete", new{dni=patient.DNI})</td>
             </tr>
         }
     </table>

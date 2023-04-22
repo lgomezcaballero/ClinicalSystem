@@ -10,5 +10,6 @@ namespace ClinicalSystem.Entities
     {
         public int DNI { get; set; }
         public string Name { get; set; }
+        public bool Active { get; set; }
     }
 }

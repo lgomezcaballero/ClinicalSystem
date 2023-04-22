@@ -9,5 +9,6 @@ namespace ClinicalSystem.Entities
     public class Doctor : Person
     {
         public int ID { get; set; }
+        public bool Active { get; set; }
     }
 }
