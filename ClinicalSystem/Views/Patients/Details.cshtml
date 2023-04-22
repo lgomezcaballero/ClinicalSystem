@@ -4,19 +4,19 @@
     ViewData["Title"] = "Detalle Paciente";
 }
 
-<h1 class="text-center">Paciente</h1>
+<h1 class="text-center">Sistema Clinico</h1>
 
 <div class="row">
     <div class="offset-12">
         <div class="card border">
             <div class="card-header bg-dark">
-                <h3 class="text-white">Detalle de Paciente</h3>
+                <h3 class="text-white">Detalle del Paciente</h3>
             </div>
             <div class="card-body">
                 <ul class="list-group">
-                    <li class="list-group-item"><strong>@Html.DisplayFor(x => x.ID)</strong></li>
-                    <li class="list-group-item"><strong>@Html.DisplayFor(x => x.DNI)</strong></li>
-                    <li class="list-group-item"><strong>@Html.DisplayFor(x => x.Name)</strong></li>
+                    <li class="list-group-item"><strong>@Html.DisplayFor(model => Model.ID)</strong></li>
+                    <li class="list-group-item"><strong>@Html.DisplayFor(model => Model.DNI)</strong></li>
+                    <li class="list-group-item"><strong>@Html.DisplayFor(model => Model.Name)</strong></li>
                 </ul>
                 <a asp-controller="Patients" asp-action="Index">Volver</a>
             </div>

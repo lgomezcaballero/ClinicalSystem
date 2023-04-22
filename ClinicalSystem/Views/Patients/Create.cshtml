@@ -1,19 +1,39 @@
 ﻿@model PatientViewModel
 
 @{
-
+    ViewData["Title"] = "Crear nuevo Paciente";
 }
-<h1>Formulario de creación</h1>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-        <h3>Crear Usuario</h3>
 
-    @Html.LabelFor(Model => Model.DNI)
-    @Html.EditorFor(Model => Model.DNI)
+<h1 class="text-center">Sistema Clinico</h1>
 
-    @Html.LabelFor(Model => Model.Name)
-    @Html.EditorFor(Model => Model.Name)
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white">Lista de Usuarios</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="DNI" class="control-label"></label>
+                            <input asp-for="DNI" class="form-control" placeholder="Ingresa el DNI" />
+                            <span asp-validation-for="DNI" class="text-danger"></span>
+                        </div>
 
-    <input type="submit" value="Guardar"/>
-}
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" placeholder="Ingresa el nombre" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        
+                        <div class="form-group mt-3">
+                            <button type="submit" class="btn btn-secondary d-block mx-auto">Crear Paciente</button>
+                        </div>
+                </form>
+               <a asp-controller="Patients" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

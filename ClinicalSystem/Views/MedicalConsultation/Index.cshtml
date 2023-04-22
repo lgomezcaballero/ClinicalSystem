@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MedicalConsultationViewModel>
+@{
+    @Html.ActionLink("Agregar Usuario", "Create");
+    <table>
+        <tr>
+            <th>ID Consulta</th>
+            <th>Nro HC</th>
+            <th>Tipo Consulta</th>
+            <th>Especialidad</th>
+            <th>Doctor</th>
+            <th>Fecha Realizacion</th>
+            <th>Costo</th>
+            <th>Descripcion</th>
+            <th>Costo material descartable</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Patient.ID</td>
+                <td>@item.QueryType.Query</td>
+                <td>@item._Specialty.Specialty</td>
+                <td>@item.Doctor.Name</td>
+                <td>@item.DateRealization</td>
+                <td>@item.Cost</td>
+                <td>@item.Description</td>
+                <td>@item.DisposableMaterialCost</td>
+
+                <td>@Html.ActionLink("Detalles", "Details", new{ID=item.ID})</td>
+                <td>@Html.ActionLink("Editar", "Edit", new{ID=item.ID})</td>
+                <td>@Html.ActionLink("Eliminar", "Delete", new{ID=item.ID})</td>
+            </tr>
+        }
+    </table>
+}

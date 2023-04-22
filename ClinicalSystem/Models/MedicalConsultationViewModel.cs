@@ -5,6 +5,7 @@
         public long ID { get; set; }
         public PatientViewModel Patient { get; set; }
         public QueryTypeViewModel QueryType { get; set; }
+        public SpecialtyViewModel _Specialty { get; set; }
         public DoctorViewModel Doctor { get; set; }
         public DateTime DateRealization { get; set; }
         public decimal Cost { get; set; }

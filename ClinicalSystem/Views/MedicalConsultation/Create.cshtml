@@ -1,0 +1,13 @@
+﻿@model MedicalConsultationViewModel
+
+
+<h1>Formulario de creación</h1>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+            <h3>Crear Consulta</h3>
+
+    @Html.DropDownListFor(model => model.Doctor.Name, new SelectList(Model.Doctor.Name, "Name"))
+
+        <input type="submit" value="Guardar"/>
+}

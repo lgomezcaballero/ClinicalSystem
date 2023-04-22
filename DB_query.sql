@@ -62,17 +62,22 @@ Create Table TipoConsultas(
 )
 go
 Create Table ConsultasMedicas(
-	IDConsulta bigint not null,
+	IDConsulta bigint not null identity(100,1),
 	NroHistoriaClinica bigint not null,
 	IDTipoConsulta int not null,
+	IDEspecialidad int not null,
 	NroMatricula int not null,
 	FechaRealizacion datetime not null default(GETDATE()),
 	Costo decimal(16,2) not null,
-	Descripcion varchar(2000),
-	CostoMaterialDescartable decimal(16,2),
+	Descripcion varchar(2000) not null,
+	CostoMaterialDescartable decimal(16,2) not null,
 	Activo bit not null default(1),
 	Primary key(IDConsulta),
 	Foreign key (NroHistoriaClinica) references Pacientes(NroHistoriaClinica),
 	Foreign key (IDTipoConsulta) references TipoConsultas(IDTipoConsulta),
+	Foreign key (IDEspecialidad) references Especialidades(IDEspecialidad),
 	Foreign key (NroMatricula) references Medicos(NroMatricula)
 )
+go
+INSERT INTO TipoConsultas (IDTipoConsulta, TipoConsulta) VALUES (1, 'Consultorio');
+INSERT INTO TipoConsultas (IDTipoConsulta, TipoConsulta) VALUES (2, 'Practica Medica');

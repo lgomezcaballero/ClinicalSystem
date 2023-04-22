@@ -1,29 +1,41 @@
 ﻿@model PatientViewModel
-@{
-    <div class="row">
-        <div class="row">
-            <h1>Editar Usuario</h1>
-        </div>
-        <div class="form-group">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <div class="col-3">
-                    @Html.LabelFor(Model => Model.ID)
-                    @Html.EditorFor(Model => Model.ID, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-                </div>
-                <div class="col-3">
-                    @Html.LabelFor(Model => Model.DNI)
-                    @Html.EditorFor(Model => Model.DNI)
-                </div>
-                <div class="col-3">
-                    @Html.LabelFor(Model => Model.Name)
-                    @Html.EditorFor(Model => Model.Name)
-                </div>
-                <input type="submit" value="Guardar" />
-            }
-        </div>
-    </div>
 
+@{
+    ViewData["Title"] = "Editar Paciente";
 }
 
+<h1 class="text-center">Sistema Clinico</h1>
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white">Lista de Usuarios</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Editar" method="post">
+
+                    <!--ID del usuario como campo oculto-->
+                    <input type="hidden" asp-for="ID" />
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="DNI" class="control-label"></label>
+                        <input asp-for="DNI" class="form-control" readonly />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" placeholder="Ingresa el nombre" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-primary d-block mx-auto">Editar Paciente</button>
+                    </div>
+                </form>
+                <a asp-controller="Patients" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
