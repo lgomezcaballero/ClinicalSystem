@@ -28,7 +28,6 @@ namespace ClinicalSystem.Controllers
             return View();
         }
 
-        // POST: PatientsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PatientViewModel patient)
@@ -58,7 +57,6 @@ namespace ClinicalSystem.Controllers
             else return RedirectToAction(nameof(Index));
         }
 
-        // POST: PatientsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PatientViewModel patient)
