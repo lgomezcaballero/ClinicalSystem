@@ -1,0 +1,19 @@
+﻿@model DoctorViewModel
+
+@{
+
+}
+<h1>Formulario de creación</h1>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+            <h3>Crear Medico</h3>
+
+    @Html.LabelFor(Model => Model.DNI)
+    @Html.EditorFor(Model => Model.DNI)
+
+    @Html.LabelFor(Model => Model.Name)
+    @Html.EditorFor(Model => Model.Name)
+
+        <input type="submit" value="Guardar"/>
+}

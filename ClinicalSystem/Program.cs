@@ -12,6 +12,7 @@ namespace ClinicalSystem
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddSingleton<IPatientServices, PatientServices>();
+            builder.Services.AddSingleton<IDoctorServices, DoctorServices>();
 
             var app = builder.Build();
 
