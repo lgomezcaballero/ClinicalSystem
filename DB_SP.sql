@@ -138,3 +138,44 @@ Begin
 	Where me.NroMatricula = @ID
 End
 go
+-----------------------------------------------------------------
+Create Procedure SP_SpecialtyList
+As
+Begin
+	Select IDEspecialidad ID, Especialidad From Especialidades
+End
+go
+Create Procedure SP_GetSpecialty(
+	@ID int
+)
+As
+Begin
+	Select IDEspecialidad ID, Especialidad From Especialidades Where IDEspecialidad = @ID
+End
+go
+-----------------------------------------------------------------
+Create Procedure SP_QueryTypeList
+As
+Begin
+	Select IDTipoConsulta ID, TipoConsulta From TipoConsultas
+End
+go
+Create Procedure SP_GetQueryType(
+	@ID int
+)
+As
+Begin
+	Select IDTipoConsulta ID, TipoConsulta From TipoConsultas Where IDTipoConsulta = @ID
+End
+go
+-----------------------------------------------------------------
+Create Procedure SP_MedicalConsultationList
+As
+Begin
+	Select IDConsulta ID, NroHistoriaClinica, IDTipoConsulta, IDEspecialidad, NroMatricula, 
+	FechaRealizacion, Costo, Descripcion, CostoMaterialDescartable, Activo
+	From ConsultasMedicas
+End
+go
+
+select * from ConsultasMedicas

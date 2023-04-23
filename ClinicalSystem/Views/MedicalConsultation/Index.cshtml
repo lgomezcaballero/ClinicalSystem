@@ -1,35 +1,103 @@
 ﻿@model IEnumerable<MedicalConsultationViewModel>
-@{
-    @Html.ActionLink("Agregar Usuario", "Create");
-    <table>
-        <tr>
-            <th>ID Consulta</th>
-            <th>Nro HC</th>
-            <th>Tipo Consulta</th>
-            <th>Especialidad</th>
-            <th>Doctor</th>
-            <th>Fecha Realizacion</th>
-            <th>Costo</th>
-            <th>Descripcion</th>
-            <th>Costo material descartable</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.ID</td>
-                <td>@item.Patient.ID</td>
-                <td>@item.QueryType.Query</td>
-                <td>@item._Specialty.Specialty</td>
-                <td>@item.Doctor.Name</td>
-                <td>@item.DateRealization</td>
-                <td>@item.Cost</td>
-                <td>@item.Description</td>
-                <td>@item.DisposableMaterialCost</td>
 
-                <td>@Html.ActionLink("Detalles", "Details", new{ID=item.ID})</td>
-                <td>@Html.ActionLink("Editar", "Edit", new{ID=item.ID})</td>
-                <td>@Html.ActionLink("Eliminar", "Delete", new{ID=item.ID})</td>
-            </tr>
-        }
-    </table>
+@{
+    ViewData["Title"] = "Consultas medicas";
+}
+
+<h1 class="text-center">Sistema Clinico</h1>
+<div class="row">
+    <div class="offset-9 col-3 mb-3">
+        <a asp-action="Create" asp-controller="MedicalConsultation" class="btn btn-secondary d-block mx-auto btn-lg">
+            Nueva consulta
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white">KHE?</h3>
+            </div>
+            <div class="card-body">
+                <div class="tabletable-responsive">
+                    @if (Model.Count() > 0)
+                    {
+                        <table class="table table-bordered" id="tblUsuarios" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID Consulta</th>
+                                    <th>Nro HC</th>
+                                    <th>Tipo Consulta</th>
+                                    <th>Especialidad</th>
+                                    <th>Doctor</th>
+                                    <th>Fecha Realizacion</th>
+                                    <th>Costo</th>
+                                    <th>Descripcion</th>
+                                    <th>Costo material descartable</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ID</td>
+                                        <td>@item.Patient.ID</td>
+                                        <td>@item.QueryType.Query</td>
+                                        <td>@item._Specialty.Specialty</td>
+                                        <td>@item.Doctor.Name</td>
+                                        <td>@item.DateRealization</td>
+                                        <td>@item.Cost</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.DisposableMaterialCost</td>
+
+                                        <td>
+                                            @Html.ActionLink("Detalles", "Details", new{ID=item.ID}, new{@class="btn btn-secondary"})
+                                            @Html.ActionLink("Editar", "Edit", new{ID=item.ID}, new{@class="btn btn-warning"})
+                                            @Html.ActionLink("Eliminar", "Delete", new{ID=item.ID}, new{@class="btn btn-danger"})
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No hay registros</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //Llamar a datatable
+            $('#tblUsuarios').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
 }

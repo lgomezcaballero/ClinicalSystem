@@ -7,7 +7,7 @@
     @Html.AntiForgeryToken()
             <h3>Crear Consulta</h3>
 
-    @Html.DropDownListFor(model => model.Doctor.Name, new SelectList(Model.Doctor.Name, "Name"))
-
+    //@Html.DropDownListFor(model => model.Doctor.Name, new SelectList(Model.Doctor, "Name"))
+    @Html.DropDownListFor(m => m._Specialty.ID, new SelectList(Model._Specialty.Specialty, "Id", "Name"), "-- Select a specialty --", new { id = "ID" })
         <input type="submit" value="Guardar"/>
 }
