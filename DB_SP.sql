@@ -177,3 +177,82 @@ Begin
 	From ConsultasMedicas
 End
 go
+Create Procedure SP_GetMedicalConsultationByPatient(
+	@NroHistoriaClinica bigint
+)
+As
+Begin
+	Select IDConsulta ID, NroHistoriaClinica, IDTipoConsulta, IDEspecialidad, NroMatricula, 
+	FechaRealizacion, Costo, Descripcion, CostoMaterialDescartable, Activo
+	From ConsultasMedicas where NroHistoriaClinica = @NroHistoriaClinica
+End
+go
+Create Procedure SP_GetMedicalConsultation(
+	@ID bigint
+)
+As
+Begin
+	Select IDConsulta ID, NroHistoriaClinica, IDTipoConsulta, IDEspecialidad, NroMatricula, 
+	FechaRealizacion, Costo, Descripcion, CostoMaterialDescartable, Activo
+	From ConsultasMedicas where IDConsulta = @ID
+End
+go
+Create Procedure SP_AddMedicalConsultation(
+	@NroHistoriaClinica bigint,
+	@IDTipoConsulta int,
+	@IDEspecialidad int,
+	@NroMatricula int,
+	@FechaRealizacion datetime,
+	@Costo decimal(16,2),
+	@Descripcion varchar(2000),
+	@CostoMaterialDescartable decimal(16,2)
+)
+As
+Begin
+	Begin Try
+		Begin Transaction
+			Insert into ConsultasMedicas (NroHistoriaClinica, IDTipoConsulta, IDEspecialidad, NroMatricula, FechaRealizacion, Costo, Descripcion, CostoMaterialDescartable)
+			values (@NroHistoriaClinica, @IDTipoConsulta, @IDEspecialidad, @NroMatricula, @FechaRealizacion, @Costo, @Descripcion, @CostoMaterialDescartable)
+		Commit Transaction
+	End Try
+	Begin Catch
+		RAISERROR('Error, no se pudo agregar la consulta', 16, 1)
+		Rollback Transaction
+	End Catch
+End
+go
+Create Procedure SP_ModifyMedicalConsultation(
+	@IDConsulta bigint,
+	@FechaRealizacion datetime,
+	@Descripcion varchar(2000)
+)
+As
+Begin
+	Begin Try
+		Begin Transaction
+			Update ConsultasMedicas Set FechaRealizacion = @FechaRealizacion, Descripcion = @Descripcion
+			Where IDConsulta = @IDConsulta
+		Commit Transaction
+	End Try 
+	Begin Catch
+		RAISERROR('Error, no se pudo modificar el medico', 16, 1)
+		Rollback Transaction
+	End Catch
+End
+go
+Create Procedure SP_DeletemedicalConsultation(
+	@ID int
+)
+As
+Begin
+	Begin Try
+		Begin Transaction
+			Update Medicos Set Activo = 0 Where NroMatricula = @ID
+		Commit Transaction
+	End Try
+	Begin Catch
+		RAISERROR('Error, no se pudo eliminar el medico', 16, 1)
+		Rollback Transaction
+	End Catch
+End
+go

@@ -81,6 +81,7 @@ namespace ClinicalSystem.Repository
                 data.setParameters("@NroHistoriaClinica", medicalConsultation._Patient.ID);
                 data.setParameters("@IDTipoConsulta", medicalConsultation._QueryType.ID);
                 data.setParameters("@IDEspecialidad", medicalConsultation._Specialty.ID);
+                data.setParameters("@NroMatricula", medicalConsultation._Doctor.ID);
                 data.setParameters("@FechaRealizacion", medicalConsultation.DateRealization);
                 data.setParameters("@Costo", medicalConsultation.Cost);
                 data.setParameters("@Descripcion", medicalConsultation.Description);
@@ -104,7 +105,7 @@ namespace ClinicalSystem.Repository
             try
             {
                 data.setSPQuery("SP_ModifyMedicalConsultation");
-                data.setParameters("@ID", medicalConsultation.ID);
+                data.setParameters("@IDConsulta", medicalConsultation.ID);
                 data.setParameters("@FechaRealizacion", medicalConsultation.DateRealization);
                 data.setParameters("@Descripcion", medicalConsultation.Description);
                 data.runAction();
@@ -188,6 +189,66 @@ namespace ClinicalSystem.Repository
                         aux.Active = (bool)data.Reader["Activo"];
                 }
                 return aux;
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+            finally
+            {
+                data.closeConnection();
+            }
+        }
+
+        public List<MedicalConsultation> GetMedicalConsultationByPatient(int NroHistoriaClinica)
+        {
+            List<MedicalConsultation> list = new List<MedicalConsultation>();
+            try
+            {
+                data.setSPQuery("SP_GetMedicalConsultationByPatient");
+                data.setParameters("@NroHistoriaClinica", NroHistoriaClinica);
+                data.executeRead();
+
+                while (data.Reader.Read())
+                {
+                    MedicalConsultation aux = new MedicalConsultation();
+                    PatientAccess patient = new PatientAccess();
+                    QueryTypeAccess query = new QueryTypeAccess();
+                    DoctorAccess doctor = new DoctorAccess();
+                    SpecialtyAccess specialty = new SpecialtyAccess();
+                    if (!(data.Reader["ID"] is DBNull))
+                        aux.ID = (int)data.Reader["ID"];
+
+                    if (!(data.Reader["DNI"] is DBNull))
+                        aux._Patient = patient.GetPatient((int)data.Reader["DNI"]);
+
+                    if (!(data.Reader["IDTipoConsulta"] is DBNull))
+                        aux._QueryType = query.GetQueryType((int)data.Reader["IDTipoConsulta"]);
+
+                    if (!(data.Reader["IDEspecialidad"] is DBNull))
+                        aux._Specialty = specialty.GetSpecialty((int)data.Reader["IDEspecialidad"]);
+
+                    if (!(data.Reader["NroMatricula"] is DBNull))
+                        aux._Doctor = doctor.GetDoctor((int)data.Reader["NroMatricula"]);
+
+                    if (!(data.Reader["FechaRealizacion"] is DBNull))
+                        aux.DateRealization = (DateTime)data.Reader["FechaRealizacion"];
+
+                    if (!(data.Reader["Costo"] is DBNull))
+                        aux.Cost = (decimal)data.Reader["Costo"];
+
+                    if (!(data.Reader["Descripcion"] is DBNull))
+                        aux.Description = (string)data.Reader["Descripcion"];
+
+                    if (!(data.Reader["CostoMaterialDescartable"] is DBNull))
+                        aux.DisposableMaterialCost = (decimal)data.Reader["CostoMaterialDescartable"];
+
+                    if (!(data.Reader["Activo"] is DBNull))
+                        aux.Active = (bool)data.Reader["Activo"];
+
+                    list.Add(aux);
+                }
+                return list;
             }
             catch (Exception)
             {
