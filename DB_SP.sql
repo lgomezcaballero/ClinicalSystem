@@ -177,5 +177,3 @@ Begin
 	From ConsultasMedicas
 End
 go
-
-select * from ConsultasMedicas

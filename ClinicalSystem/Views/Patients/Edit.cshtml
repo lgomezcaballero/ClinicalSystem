@@ -10,10 +10,10 @@
     <div class="offset-12">
         <div class="card border">
             <div class="card-header bg-dark">
-                <h3 class="text-white">Lista de Usuarios</h3>
+                <h3 class="text-white">Editar Paciente</h3>
             </div>
             <div class="card-body">
-                <form asp-action="Editar" method="post">
+                <form asp-action="Edit" method="post">
 
                     <!--ID del usuario como campo oculto-->
                     <input type="hidden" asp-for="ID" />
@@ -34,7 +34,7 @@
                         <button type="submit" class="btn btn-primary d-block mx-auto">Editar Paciente</button>
                     </div>
                 </form>
-                <a asp-controller="Patients" asp-action="Index">Volver</a>
+                <a asp-controller="Patients" class="btn btn-primary" asp-action="Index">Volver</a>
             </div>
         </div>
     </div>
