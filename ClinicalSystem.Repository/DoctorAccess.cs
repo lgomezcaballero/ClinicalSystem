@@ -26,6 +26,9 @@ namespace ClinicalSystem.Repository
 
                     if (!(data.Reader["DNI"] is DBNull))
                         aux.DNI = (int)data.Reader["DNI"];
+                    
+                    if (!(data.Reader["Nombre"] is DBNull))
+                        aux.Name = (string)data.Reader["Nombre"];
 
                     if (!(data.Reader["ID"] is DBNull))
                         aux.Active = (bool)data.Reader["Activo"];
